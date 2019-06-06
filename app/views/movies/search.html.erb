@@ -1,0 +1,40 @@
+<h1>Elastic search for movies</h1>
+
+<%= form_for :search_movies, url: search_movies_path, method: :get do |form| %>
+  <%= form.text_field :query, value: params[:search_movies].presence && params[:search_movies][:query] %>
+  <%= form.submit 'Search' %>
+<% end %>
+
+<% unless @movies.nil? %>
+  <% if @movies.empty? %>
+    <h2>No movies found matching your query.</h2>
+  <% else %>
+    <h2>Search results</h2>
+
+    <table style="width: 100%;">
+      <thead>
+         <tr>
+           <th>Title</th>
+           <th>Synopsis</th>
+           <th>Rating</th>
+           <th>Released</th>
+           <th>Runtime</th>
+           <th></th>
+         </tr>
+      </thead>
+
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td><%= movie.title %></td>
+            <td><%= movie.synopsis.html_safe %></td>
+            <td><%= movie.rating %></td>
+            <td><%= movie.released %></td>
+            <td><%= movie.runtime %></td>
+            <td><%= link_to 'View', movie_path(movie.id) %></td>
+          </tr>
+        <% end %>
+      <tbody>
+    </table>
+  <% end %>
+<% end %>

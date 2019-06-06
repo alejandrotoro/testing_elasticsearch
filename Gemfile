@@ -66,3 +66,7 @@ gem "unirest"
 
 # Dotenv
 gem 'dotenv-rails', groups: [:development, :test]
+
+# Elasticsearch
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
